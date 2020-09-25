@@ -1,0 +1,2 @@
+SELECT CittaPart FROM Volo WHERE CittaArr = 'Roma' ORDER BY CittaPart ASC
+SELECT Citta FROM Aereoporto WHERE NumPiste = 0

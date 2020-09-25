@@ -1,0 +1,15 @@
+1) SELECT Nome FROM Sale WHERE Citta = 'Pisa'
+2) SELECT Titolo FROM Film WHERE Regista = 'F. Fellini' AND AnnoProduzione > 1960
+3) SELECT Titolo, Durata FROM Film WHERE Genere = 'Fantascienza' AND AnnoProduzione > 1960 AND (Nazionalita = 'Francese' OR Nazionalita = 'Giapponese')
+4) SELECT Titolo FROM Film WHERE (Genere = 'Fantascienza' AND Nazionalita = 'Giapponese' AND AnnoProduzione > 1960) OR Nazionalita = 'Francese'
+5) SELECT Titolo FROM Film WHERE Regista = (SELECT Regista FROM Film WHERE Titolo = 'Casablanca')
+6) SELECT Titolo, Genere FROM Film f, Proiezioni p WHERE p.CodFilm = f.CodFilm AND p.DataProiezione = '25/12/2004'
+7) SELECT DISTINCT Titolo, Genere FROM Film f, Proiezioni p, Sale s WHERE p.CodFilm = f.CodFilm AND p.DataProiezione = '25/12/2004' AND p.CodSala = s.CodSala AND s.Citta = 'Napoli'
+8) SELECT DISTINCT s.Nome FROM Film f, Proiezioni p, Sale s, Attori a, Recita r WHERE p.DataProiezione = CAST('2004-12-25' AS date) AND f.CodFilm=r.CodFilm AND f.CodFilm= p.CodFilm AND p.CodSala=s.CodSala AND a.CodAttore=r.CodAttore AND a.Nome='R.Williams' AND s.Citta='Napoli'
+9) SELECT f.Titolo FROM Film f, Attori a, Recita r WHERE (a.Nome = 'Mastroianni' OR a.Nome = 'Loren') AND r.CodFilm = f.CodFilm AND r.CodAttore = a.CodAttore
+10) SELECT DISTINCT f.Titolo FROM Film f, Attori a, Recita r, Proiezioni p WHERE (a.Nome = 'M.Mastroianni' AND a.Nome ='S.Loren') AND a.CodAttore = r.CodAttore AND r.CodFilm = f.CodFilm
+11) SELECT Titolo, Nome FROM Film f, Attori a, Recita r WHERE(r.CodAttore = (SELECT CodAttore FROM Attori WHERE Nazionalita = 'Francese') AND f.CodFilm = r.CodFilm AND a.Nazionalita = 'Francese')
+12) SELECT Titolo, Nome FROM Sale s, Film f, Proiezioni p WHERE((SELECT CodSala FROM Sale WHERE Citta = 'Pisa') = p.CodSala AND p.CodSala = s.CodSala AND p.CodFilm = f.CodFilm AND p.DataProiezione = '01/01/2005')
+13) SELECT COUNT(Posti) FROM Sale WHERE Citta = 'Pisa' AND Posti > 60
+14) SELECT SUM(Posti) FROM Sale WHERE Città = 'Pisa'
+15) SELECT  Citta, COUNT(Citta) FROM Sale GROUP BY Citta
